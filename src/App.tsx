@@ -1,11 +1,9 @@
-import './App.css';
+import * as React from 'react';
 
-import { Button } from '@material-ui/core';
-import React from 'react';
-import logo from './logo.svg';
+export interface AppProps {}
 
-function App() {
-  return <div className='App'></div>;
-}
+const App: React.FunctionComponent<AppProps> = () => {
+  return <div>Books</div>;
+};
 
 export default App;
