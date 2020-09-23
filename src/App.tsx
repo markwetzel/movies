@@ -7,6 +7,7 @@ export interface AppProps {}
 
 const App: React.FunctionComponent<AppProps> = () => {
   const [movies, setMovies] = React.useState<MovieResult[]>([]);
+  const [movieSearch, setMovieSearch] = React.useState('');
 
   React.useEffect(() => {
     axiosConfig
@@ -20,11 +21,30 @@ const App: React.FunctionComponent<AppProps> = () => {
       });
   }, []);
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    console.log('Submit');
+  };
+
   return (
     <div>
       Movies
+      <form onSubmit={handleSubmit}>
+        <input
+          id='movie-name'
+          name='movie-name'
+          onChange={(e) => setMovieSearch(e.target.value)}
+          placeholder='Search movies...'
+          type='search'
+          value={movieSearch}
+        />
+        <button>Search</button>
+      </form>
       {movies.map((movie) => (
-        <article key={movie.id}>{movie.title}</article>
+        <article key={movie.id}>
+          <header>{movie.title}</header>
+        </article>
       ))}
     </div>
   );
