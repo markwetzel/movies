@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-
+import React from 'react';
 import { Typography } from '@material-ui/core';
 import logo from './logo.png';
 

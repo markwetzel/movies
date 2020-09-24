@@ -1,11 +1,5 @@
-import {
-  Button,
-  IconButton,
-  InputAdornment,
-  TextField,
-} from '@material-ui/core';
+import { IconButton, InputAdornment, TextField } from '@material-ui/core';
 
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import React from 'react';
 import SearchIcon from '@material-ui/icons/Search';
 
