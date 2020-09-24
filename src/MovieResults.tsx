@@ -77,7 +77,7 @@ function Row(props: { row: MovieResult; tmdbConfig?: Config }) {
                 <TableBody>
                   <TableRow>
                     <TableCell colSpan={4}>
-                      <img src={url} alt={row.title} />
+                      <img src={url} alt={row.title} height={500} />
                     </TableCell>
                     <Typography>{row.overview}</Typography>
                   </TableRow>
@@ -97,6 +97,8 @@ export interface MovieResultsProps {
 }
 
 const MovieResults: React.FunctionComponent<MovieResultsProps> = (props) => {
+  console.log('Rendering...');
+
   return (
     <TableContainer component={Paper}>
       <Table aria-label='collapsible table'>
