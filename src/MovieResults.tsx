@@ -111,8 +111,8 @@ const MovieResults: React.FunctionComponent<MovieResultsProps> = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.movies.map((movie) => (
-            <Row key={movie.id} row={movie} tmdbConfig={props.tmdbConfig} />
+          {movies.map((movie) => (
+            <Row key={movie.id} row={movie} tmdbConfig={tmdbConfig} />
           ))}
         </TableBody>
       </Table>

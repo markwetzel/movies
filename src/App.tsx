@@ -4,17 +4,8 @@ import Config from './Config';
 import Header from './Header';
 import MovieResult from './MovieResult';
 import MovieResults from './MovieResults';
-import Paper from '@material-ui/core/Paper';
 import Search from './Search';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import { TextField } from '@material-ui/core';
 import axiosConfig from './axios';
-import { makeStyles } from '@material-ui/core/styles';
 
 export interface AppProps {}
 
@@ -31,7 +22,7 @@ const App: React.FunctionComponent<AppProps> = () => {
         const config = res.data as Config;
         setTmdbConfig(config);
       })
-      .catch((err) => {
+      .catch(() => {
         console.log('Error retrieving config');
       });
   }, []);
