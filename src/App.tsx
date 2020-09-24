@@ -7,24 +7,18 @@ export interface AppProps {}
 
 const App: React.FunctionComponent<AppProps> = () => {
   const [movies, setMovies] = React.useState<MovieResult[]>([]);
-  const [movieSearch, setMovieSearch] = React.useState('');
-
-  React.useEffect(() => {
-    axiosConfig
-      .get(
-        `/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&query=boondock&page=1&include_adult=false`
-      )
-      .then((res) => {
-        const { results: movieResults } = res.data;
-        console.log(movieResults);
-        setMovies(movieResults);
-      });
-  }, []);
+  const [query, setQuery] = React.useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    console.log('Submit');
+    axiosConfig
+      .get(
+        `/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`
+      )
+      .then((res) => {
+        const { results: movieResults } = res.data;
+        setMovies(movieResults);
+      });
   };
 
   return (
@@ -34,10 +28,10 @@ const App: React.FunctionComponent<AppProps> = () => {
         <input
           id='movie-name'
           name='movie-name'
-          onChange={(e) => setMovieSearch(e.target.value)}
+          onChange={(e) => setQuery(e.target.value)}
           placeholder='Search movies...'
           type='search'
-          value={movieSearch}
+          value={query}
         />
         <button>Search</button>
       </form>
