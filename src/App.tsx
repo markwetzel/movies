@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import Config from './Config';
+import Header from './Header';
 import MovieResult from './MovieResult';
 import MovieResults from './MovieResults';
 import Paper from '@material-ui/core/Paper';
@@ -55,7 +56,7 @@ const App: React.FunctionComponent<AppProps> = () => {
 
   return (
     <div>
-      Movies
+      <Header title='Cinemate' />
       <Search onSubmit={handleSearchSubmit} />
       <MovieResults tmdbConfig={tmdbConfig} movies={movies} />
     </div>
