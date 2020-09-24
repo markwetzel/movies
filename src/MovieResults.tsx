@@ -97,9 +97,8 @@ export interface MovieResultsProps {
 }
 
 const MovieResults: React.FunctionComponent<MovieResultsProps> = (props) => {
-  console.log('Rendering...');
-
-  return (
+  const { movies, tmdbConfig } = props;
+  const movieTable = (
     <TableContainer component={Paper}>
       <Table aria-label='collapsible table'>
         <TableHead>
@@ -119,6 +118,8 @@ const MovieResults: React.FunctionComponent<MovieResultsProps> = (props) => {
       </Table>
     </TableContainer>
   );
+
+  return movies.length > 0 ? movieTable : null;
 };
 
 export default MovieResults;
