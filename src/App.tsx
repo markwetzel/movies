@@ -10,6 +10,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import { TextField } from '@material-ui/core';
 import axiosConfig from './axios';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -49,11 +50,13 @@ const App: React.FunctionComponent<AppProps> = () => {
     <div>
       Movies
       <form onSubmit={handleSubmit}>
-        <input
+        <TextField
+          autoComplete='off'
+          fullWidth={true}
           id='movie-name'
+          label='Search movies...'
           name='movie-name'
           onChange={(e) => setQuery(e.target.value)}
-          placeholder='Search movies...'
           type='search'
           value={query}
         />
