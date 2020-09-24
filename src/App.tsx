@@ -4,6 +4,7 @@ import Config from './Config';
 import MovieResult from './MovieResult';
 import MovieResults from './MovieResults';
 import Paper from '@material-ui/core/Paper';
+import Search from './Search';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -18,7 +19,7 @@ export interface AppProps {}
 
 const App: React.FunctionComponent<AppProps> = () => {
   const [movies, setMovies] = React.useState<MovieResult[]>([]);
-  const [query, setQuery] = React.useState('');
+
   const [tmdbConfig, setTmdbConfig] = React.useState<Config>();
 
   // Get the TMDB configuration
@@ -34,8 +35,11 @@ const App: React.FunctionComponent<AppProps> = () => {
       });
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSearchSubmit = (
+    event: React.FormEvent<HTMLFormElement>,
+    query: string
+  ) => {
+    event.preventDefault();
     axiosConfig
       .get(
         `search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`
@@ -43,25 +47,16 @@ const App: React.FunctionComponent<AppProps> = () => {
       .then((res) => {
         const { results: movieResults } = res.data;
         setMovies(movieResults);
+      })
+      .catch((err) => {
+        console.log('Something went wrong!', err);
       });
   };
 
   return (
     <div>
       Movies
-      <form onSubmit={handleSubmit}>
-        <TextField
-          autoComplete='off'
-          fullWidth={true}
-          id='movie-name'
-          label='Search movies...'
-          name='movie-name'
-          onChange={(e) => setQuery(e.target.value)}
-          type='search'
-          value={query}
-        />
-        <button>Search</button>
-      </form>
+      <Search onSubmit={handleSearchSubmit} />
       <MovieResults tmdbConfig={tmdbConfig} movies={movies} />
     </div>
   );
