@@ -4,6 +4,7 @@ import Config from './Config';
 import IconButton from '@material-ui/core/IconButton';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import MovieMenu from './MovieMenu';
 import MovieResult from './MovieResult';
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
@@ -61,7 +62,9 @@ function Row(props: { row: MovieResult; tmdbConfig?: Config }) {
         </TableCell>
         <TableCell align='right'>{row.vote_average}</TableCell>
         <TableCell align='right'>{row.release_date}</TableCell>
-        <TableCell align='right'>Actions</TableCell>
+        <TableCell align='right'>
+          <MovieMenu />
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
