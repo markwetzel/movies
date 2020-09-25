@@ -2,6 +2,12 @@ import { IconButton, InputAdornment, TextField } from '@material-ui/core';
 
 import React from 'react';
 import SearchIcon from '@material-ui/icons/Search';
+import css from '@emotion/css/macro';
+import styled from '@emotion/styled/macro';
+
+const Form = styled.form`
+  margin: 1em 0;
+`;
 
 export interface SearchProps {
   onSubmit(event: React.FormEvent<HTMLFormElement>, query: string): void;
@@ -16,7 +22,7 @@ const Search: React.FunctionComponent<SearchProps> = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <TextField
         autoComplete='off'
         fullWidth={true}
@@ -26,6 +32,7 @@ const Search: React.FunctionComponent<SearchProps> = (props) => {
         onChange={(e) => setQuery(e.target.value)}
         type='search'
         value={query}
+        variant='outlined'
         InputProps={{
           endAdornment: (
             <InputAdornment position='end'>
@@ -36,7 +43,7 @@ const Search: React.FunctionComponent<SearchProps> = (props) => {
           ),
         }}
       />
-    </form>
+    </Form>
   );
 };
 
