@@ -6,6 +6,8 @@ import MovieResult from './MovieResult';
 import MovieResults from './MovieResults';
 import Search from './Search';
 import axiosConfig from './axios';
+import css from '@emotion/css/macro';
+import styled from '@emotion/styled/macro';
 
 export interface AppProps {}
 
@@ -13,6 +15,10 @@ const App: React.FunctionComponent<AppProps> = () => {
   const [movies, setMovies] = React.useState<MovieResult[]>([]);
 
   const [tmdbConfig, setTmdbConfig] = React.useState<Config>();
+
+  const Container = styled.div`
+    padding: 1em;
+  `;
 
   // Get the TMDB configuration
   React.useEffect(() => {
@@ -46,11 +52,11 @@ const App: React.FunctionComponent<AppProps> = () => {
   };
 
   return (
-    <div>
+    <Container>
       <Header title='Cinemate' />
       <Search onSubmit={handleSearchSubmit} />
       <MovieResults tmdbConfig={tmdbConfig} movies={movies} />
-    </div>
+    </Container>
   );
 };
 
