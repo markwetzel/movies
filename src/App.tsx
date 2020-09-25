@@ -7,7 +7,7 @@ import Favorites from './Favorites';
 import Header from './Header';
 import MovieResult from './MovieResult';
 import MovieResults from './MovieResults';
-import NavBar from './NavBar';
+import NavBar from './BottomNav';
 import Search from './Search';
 import WatchLater from './WatchLater';
 import axiosConfig from './axios';
