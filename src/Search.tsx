@@ -16,7 +16,14 @@ export interface SearchProps {
 const Search: React.FunctionComponent<SearchProps> = (props) => {
   const [query, setQuery] = React.useState('');
 
+  const isQueryEmpty = () => query.trim().length === 0;
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    if (isQueryEmpty()) {
+      event.preventDefault();
+      return;
+    }
+
     props.onSubmit(event, query);
     setQuery('');
   };
@@ -36,7 +43,11 @@ const Search: React.FunctionComponent<SearchProps> = (props) => {
         InputProps={{
           endAdornment: (
             <InputAdornment position='end'>
-              <IconButton aria-label='search' type='submit'>
+              <IconButton
+                aria-label='search'
+                disabled={isQueryEmpty()}
+                type='submit'
+              >
                 <SearchIcon />
               </IconButton>
             </InputAdornment>
