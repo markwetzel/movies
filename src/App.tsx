@@ -1,10 +1,15 @@
 import * as React from 'react';
 
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
 import Config from './Config';
+import Favorites from './Favorites';
 import Header from './Header';
 import MovieResult from './MovieResult';
 import MovieResults from './MovieResults';
+import NavBar from './NavBar';
 import Search from './Search';
+import WatchLater from './WatchLater';
 import axiosConfig from './axios';
 import css from '@emotion/css/macro';
 import styled from '@emotion/styled/macro';
@@ -52,11 +57,24 @@ const App: React.FunctionComponent<AppProps> = () => {
   };
 
   return (
-    <Container>
-      <Header title='Cinemate' />
-      <Search onSubmit={handleSearchSubmit} />
-      <MovieResults tmdbConfig={tmdbConfig} movies={movies} />
-    </Container>
+    <BrowserRouter>
+      <Container>
+        <Header title='Cinemate' />
+        <Switch>
+          <Route path='/favorites'>
+            <Favorites />
+          </Route>
+          <Route path='/later'>
+            <WatchLater />
+          </Route>
+          <Route path='/'>
+            <Search onSubmit={handleSearchSubmit} />
+            <MovieResults tmdbConfig={tmdbConfig} movies={movies} />
+          </Route>
+        </Switch>
+      </Container>
+      <NavBar />
+    </BrowserRouter>
   );
 };
 
