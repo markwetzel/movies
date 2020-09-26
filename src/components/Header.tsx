@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Typography } from '@material-ui/core';
-import logo from './logo.png';
+import logo from '../assets/img/logo.png';
 import styled from '@emotion/styled/macro';
 
 const $Header = styled.div`

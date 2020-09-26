@@ -4,16 +4,16 @@ import * as React from 'react';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import Config from './Config';
+import Config from '../types/Config';
 import Favorites from './Favorites';
 import Header from './Header';
-import MovieResult from './MovieResult';
+import MovieResult from '../types/MovieResult';
 import MovieResults from './MovieResults';
 import NavBar from './BottomNav';
 import Search from './Search';
 import TopNav from './TopNav';
 import WatchLater from './WatchLater';
-import axiosConfig from './axios';
+import axiosConfig from '../util/axios';
 import styled from '@emotion/styled/macro';
 
 export interface AppProps {}
