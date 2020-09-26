@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-pascal-case */
+
 import * as React from 'react';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
@@ -12,7 +14,6 @@ import Search from './Search';
 import TopNav from './TopNav';
 import WatchLater from './WatchLater';
 import axiosConfig from './axios';
-import css from '@emotion/css/macro';
 import styled from '@emotion/styled/macro';
 
 export interface AppProps {}
@@ -22,7 +23,7 @@ const App: React.FunctionComponent<AppProps> = () => {
 
   const [tmdbConfig, setTmdbConfig] = React.useState<Config>();
 
-  const Container = styled.div`
+  const $Container = styled.div`
     padding: 1em;
   `;
 
@@ -60,7 +61,7 @@ const App: React.FunctionComponent<AppProps> = () => {
   return (
     <BrowserRouter>
       <TopNav />
-      <Container>
+      <$Container>
         <Header title='Cinemate' />
         <Switch>
           <Route path='/favorites'>
@@ -74,7 +75,7 @@ const App: React.FunctionComponent<AppProps> = () => {
             <MovieResults tmdbConfig={tmdbConfig} movies={movies} />
           </Route>
         </Switch>
-      </Container>
+      </$Container>
       <NavBar />
     </BrowserRouter>
   );

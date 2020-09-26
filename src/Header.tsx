@@ -1,9 +1,15 @@
+/* eslint-disable react/jsx-pascal-case */
+
 import React from 'react';
 import { Typography } from '@material-ui/core';
-import { createMuiTheme } from '@material-ui/core/styles';
-import css from '@emotion/css/macro';
 import logo from './logo.png';
 import styled from '@emotion/styled/macro';
+
+const $Header = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: center;
+`;
 
 export interface HeaderProps {
   title: string;
@@ -12,27 +18,13 @@ export interface HeaderProps {
 const Header: React.FunctionComponent<HeaderProps> = (props) => {
   const { title } = props;
 
-  const theme = createMuiTheme();
-
-  const Header = styled.div`
-    align-items: center;
-    display: flex;
-    justify-content: center;
-
-    /* ${theme.breakpoints.down(
-      'sm'
-    )} {
-      justify-content: space-around;
-    } */
-  `;
-
   return (
-    <Header>
-      <img src={logo} alt='Logo' height='100px' />
+    <$Header>
+      <img alt='Logo' height='100px' src={logo} />
       <Typography component='h1' variant='h2'>
         {title}
       </Typography>
-    </Header>
+    </$Header>
   );
 };
 

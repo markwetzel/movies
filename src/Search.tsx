@@ -1,11 +1,12 @@
+/* eslint-disable react/jsx-pascal-case */
+
 import { IconButton, InputAdornment, TextField } from '@material-ui/core';
 
 import React from 'react';
 import SearchIcon from '@material-ui/icons/Search';
-import css from '@emotion/css/macro';
 import styled from '@emotion/styled/macro';
 
-const Form = styled.form`
+const $Form = styled.form`
   margin: 1em 0;
 `;
 
@@ -29,7 +30,7 @@ const Search: React.FunctionComponent<SearchProps> = (props) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <$Form onSubmit={handleSubmit}>
       <TextField
         autoComplete='off'
         fullWidth={true}
@@ -54,7 +55,7 @@ const Search: React.FunctionComponent<SearchProps> = (props) => {
           ),
         }}
       />
-    </Form>
+    </$Form>
   );
 };
 

@@ -22,7 +22,9 @@ const $BottomNavigation = styled(BottomNavigation)`
   }
 `;
 
-const BottomNav: React.FC = (props) => {
+export interface BottomNavProps {}
+
+const BottomNav: React.FC<BottomNavProps> = (props) => {
   const history = useHistory();
 
   const [value, setValue] = React.useState(0);
