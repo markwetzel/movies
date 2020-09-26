@@ -9,6 +9,7 @@ import MovieResult from './MovieResult';
 import MovieResults from './MovieResults';
 import NavBar from './BottomNav';
 import Search from './Search';
+import TopNav from './TopNav';
 import WatchLater from './WatchLater';
 import axiosConfig from './axios';
 import css from '@emotion/css/macro';
@@ -58,6 +59,7 @@ const App: React.FunctionComponent<AppProps> = () => {
 
   return (
     <BrowserRouter>
+      <TopNav />
       <Container>
         <Header title='Cinemate' />
         <Switch>
