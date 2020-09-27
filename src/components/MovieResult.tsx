@@ -19,6 +19,7 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import MR from '../types/MovieResult';
 import MovieMenu from './MovieMenu';
+import { formatDate } from '../util/date';
 
 export interface MovieResult {
   row: MR;
@@ -57,7 +58,7 @@ const MovieResult: React.FunctionComponent<MovieResult> = (props) => {
         <$ResponsiveTableCell align='right'>
           {row.vote_average}
         </$ResponsiveTableCell>
-        <TableCell align='right'>{row.release_date}</TableCell>
+        <TableCell align='right'>{formatDate(row.release_date)}</TableCell>
         <TableCell align='right'>
           <MovieMenu />
         </TableCell>
