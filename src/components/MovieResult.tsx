@@ -25,7 +25,7 @@ export interface MovieResult {
   tmdbConfig?: Config;
 }
 
-const MovieResultJsx: React.FunctionComponent<MovieResult> = (props) => {
+const MovieResult: React.FunctionComponent<MovieResult> = (props) => {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
   let url;
@@ -75,7 +75,9 @@ const MovieResultJsx: React.FunctionComponent<MovieResult> = (props) => {
                     <TableCell colSpan={4}>
                       <img src={url} alt={row.title} height={500} />
                     </TableCell>
-                    <Typography>{row.overview}</Typography>
+                    <TableCell colSpan={4}>
+                      <Typography>{row.overview}</Typography>
+                    </TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
@@ -87,4 +89,4 @@ const MovieResultJsx: React.FunctionComponent<MovieResult> = (props) => {
   );
 };
 
-export default MovieResultJsx;
+export default MovieResult;
