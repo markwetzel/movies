@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-pascal-case */
+
 import * as React from 'react';
 
 import {
@@ -11,6 +13,7 @@ import {
   Typography,
 } from '@material-ui/core';
 
+import { $ResponsiveTableCell } from './MovieResults';
 import Config from '../types/Config';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
@@ -51,7 +54,9 @@ const MovieResultJsx: React.FunctionComponent<MovieResult> = (props) => {
         <TableCell component='th' scope='row'>
           {row.title}
         </TableCell>
-        <TableCell align='right'>{row.vote_average}</TableCell>
+        <$ResponsiveTableCell align='right'>
+          {row.vote_average}
+        </$ResponsiveTableCell>
         <TableCell align='right'>{row.release_date}</TableCell>
         <TableCell align='right'>
           <MovieMenu />

@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-pascal-case */
+
 import Config from '../types/Config';
 import MovieResult from '../types/MovieResult';
 import MovieResultJsx from './MovieResult';
@@ -9,6 +11,16 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import { createMuiTheme } from '@material-ui/core';
+import styled from '@emotion/styled/macro';
+
+const theme = createMuiTheme();
+
+export const $ResponsiveTableCell = styled(TableCell)`
+  ${theme.breakpoints.down('xs')} {
+    display: none !important;
+  }
+`;
 
 export interface MovieResultsProps {
   movies: MovieResult[];
@@ -24,7 +36,7 @@ const MovieResults: React.FunctionComponent<MovieResultsProps> = (props) => {
           <TableRow>
             <TableCell />
             <TableCell>Title</TableCell>
-            <TableCell align='right'>Rating</TableCell>
+            <$ResponsiveTableCell align='right'>Rating</$ResponsiveTableCell>
             <TableCell align='right'>Release Date</TableCell>
             <TableCell align='right'>Actions</TableCell>
           </TableRow>
