@@ -22,6 +22,7 @@ export interface AppProps {}
 const App: React.FunctionComponent<AppProps> = () => {
   const [movies, setMovies] = React.useState<MovieResult[]>([]);
   const [watchLaterIds, setWatchLaterIds] = React.useState<number[]>([]);
+  const [watchLater, setWatchLater] = React.useState<MovieResult[]>([]);
 
   const [tmdbConfig, setTmdbConfig] = React.useState<Config>();
 
@@ -42,30 +43,59 @@ const App: React.FunctionComponent<AppProps> = () => {
       });
   }, []);
 
-  const handleSearchSubmit = (
+  const handleSearchSubmit = async (
     event: React.FormEvent<HTMLFormElement>,
     query: string
   ) => {
     event.preventDefault();
-    axiosConfig
-      .get(
-        `search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`
-      )
-      .then((res) => {
-        const { results: movieResults } = res.data;
-        setMovies(movieResults);
-      })
-      .catch((err) => {
-        console.log('Something went wrong!', err);
-      });
+
+    const movieResults = await searchMovies(query);
+    console.log(movieResults);
+
+    if (movieResults) {
+      setMovies(movieResults);
+    }
   };
 
   const handleFavoriteClick = (movieResultId: number) => {
     console.log('Favorite click', movieResultId);
   };
 
-  const handleWatchLaterClick = (movieResultId: number) => {
-    setWatchLaterIds(watchLaterIds.concat(movieResultId));
+  const fetchMovie = async (
+    movieId: number
+  ): Promise<MovieResult | undefined> => {
+    try {
+      const res = await axiosConfig.get(
+        `movie/${movieId}?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US`
+      );
+
+      return res.data as MovieResult;
+    } catch (error) {
+      console.log('Something went wrong!', error);
+    }
+  };
+
+  const searchMovies = async (
+    query: string
+  ): Promise<MovieResult[] | undefined> => {
+    try {
+      const res = await axiosConfig.get(
+        `search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`
+      );
+
+      return res.data.results as MovieResult[];
+    } catch (error) {
+      console.log('Something went wrong!', error);
+    }
+  };
+
+  const handleWatchLaterClick = async (movieResultId: number) => {
+    if (!watchLater.find((movie: MovieResult) => movie.id === movieResultId)) {
+      const movieResult = await fetchMovie(movieResultId);
+      if (movieResult) {
+        setWatchLater(watchLater.concat(movieResult));
+      }
+    }
   };
 
   const theme = createMuiTheme({
@@ -87,7 +117,10 @@ const App: React.FunctionComponent<AppProps> = () => {
               <Favorites />
             </Route>
             <Route path='/later'>
-              <WatchLater />
+              <WatchLater
+                watchLaterIds={watchLaterIds}
+                watchLaterMovies={watchLater}
+              />
             </Route>
             <Route path='/'>
               <Search onSubmit={handleSearchSubmit} />

@@ -25,8 +25,8 @@ export const $ResponsiveTableCell = styled(TableCell)`
 export interface MovieResultsProps {
   movies: MovieResult[];
   tmdbConfig?: Config;
-  onWatchLaterClick(movieResultId: number): void;
-  onFavoriteClick(movieResultId: number): void;
+  onWatchLaterClick?(movieResultId: number): void;
+  onFavoriteClick?(movieResultId: number): void;
 }
 
 const MovieResults: React.FunctionComponent<MovieResultsProps> = (props) => {
