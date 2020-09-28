@@ -9,8 +9,9 @@ import ScheduleIcon from '@material-ui/icons/Schedule';
 import StyledMenu from './StyledMenu';
 
 export interface MovieMenuProps {
-  onWatchLaterClick(): void;
-  onFavoriteClick(): void;
+  movieResultId: number;
+  onWatchLaterClick(movieResultId: number): void;
+  onFavoriteClick(movieResultId: number): void;
 }
 
 const MovieMenu: React.FC<MovieMenuProps> = (props) => {
@@ -25,11 +26,11 @@ const MovieMenu: React.FC<MovieMenuProps> = (props) => {
   };
 
   const addToWatchLater = () => {
-    props.onWatchLaterClick();
+    props.onWatchLaterClick(props.movieResultId);
   };
 
   const addToFavorites = () => {
-    props.onFavoriteClick();
+    props.onFavoriteClick(props.movieResultId);
   };
 
   const handleWatchLaterClick = () => {
@@ -37,7 +38,7 @@ const MovieMenu: React.FC<MovieMenuProps> = (props) => {
     closeMenu();
   };
 
-  const handleFavoriteClick = () => {
+  const handleFavoriteClick = (event: React.MouseEvent<HTMLElement>) => {
     addToFavorites();
     closeMenu();
   };

@@ -59,12 +59,12 @@ const App: React.FunctionComponent<AppProps> = () => {
       });
   };
 
-  const handleFavoriteClick = () => {
-    console.log('Favorite click');
+  const handleFavoriteClick = (movieResultId: number) => {
+    console.log('Favorite click', movieResultId);
   };
 
-  const handleWatchLaterClick = () => {
-    console.log('Watch later click');
+  const handleWatchLaterClick = (movieResultId: number) => {
+    console.log('Watch later click', movieResultId);
   };
 
   const theme = createMuiTheme({

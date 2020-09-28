@@ -29,8 +29,8 @@ const $TableRow = styled(TableRow)`
 export interface MovieResultProps {
   row: MR;
   tmdbConfig?: Config;
-  onWatchLaterClick(): void;
-  onFavoriteClick(): void;
+  onWatchLaterClick(movieResultId: number): void;
+  onFavoriteClick(movieResultId: number): void;
 }
 
 const MovieResult: React.FunctionComponent<MovieResultProps> = (props) => {
@@ -68,6 +68,7 @@ const MovieResult: React.FunctionComponent<MovieResultProps> = (props) => {
         <TableCell align='right'>{formatDate(row.release_date)}</TableCell>
         <TableCell align='right'>
           <MovieMenu
+            movieResultId={row.id}
             onFavoriteClick={props.onFavoriteClick}
             onWatchLaterClick={props.onWatchLaterClick}
           />
