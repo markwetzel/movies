@@ -1,12 +1,12 @@
-import { isString } from './string';
+import { isString, isStringEmpty } from './string';
 
-export const parseDate = (date: string) => new Date(Date.parse(date));
+export const parseDate = (date: string): Date => new Date(Date.parse(date));
 
-export const formatDate = (dateInput: string | Date) => {
+export const formatDate = (dateInput: string | Date): string | undefined => {
   let parsedDate: Date;
-  parsedDate = isString(dateInput)
-    ? parseDate(dateInput as string)
-    : (dateInput as Date);
 
+  if (!isString(dateInput) || isStringEmpty(dateInput as string)) return;
+
+  parsedDate = parseDate(dateInput as string);
   return parsedDate.toLocaleDateString();
 };
