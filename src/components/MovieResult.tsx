@@ -20,6 +20,11 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import MR from '../types/MovieResult';
 import MovieMenu from './MovieMenu';
 import { formatDate } from '../util/date';
+import styled from '@emotion/styled/macro';
+
+const $TableRow = styled(TableRow)`
+  vertical-align: top !important;
+`;
 
 export interface MovieResult {
   row: MR;
@@ -72,14 +77,14 @@ const MovieResult: React.FunctionComponent<MovieResult> = (props) => {
               </Typography>
               <Table size='small' aria-label='purchases'>
                 <TableBody>
-                  <TableRow>
+                  <$TableRow>
                     <TableCell colSpan={4}>
                       <img src={url} alt={row.title} height={500} />
                     </TableCell>
                     <TableCell colSpan={4}>
                       <Typography>{row.overview}</Typography>
                     </TableCell>
-                  </TableRow>
+                  </$TableRow>
                 </TableBody>
               </Table>
             </Box>
