@@ -21,6 +21,7 @@ export interface AppProps {}
 
 const App: React.FunctionComponent<AppProps> = () => {
   const [movies, setMovies] = React.useState<MovieResult[]>([]);
+  const [watchLaterIds, setWatchLaterIds] = React.useState<number[]>([]);
 
   const [tmdbConfig, setTmdbConfig] = React.useState<Config>();
 
@@ -64,7 +65,7 @@ const App: React.FunctionComponent<AppProps> = () => {
   };
 
   const handleWatchLaterClick = (movieResultId: number) => {
-    console.log('Watch later click', movieResultId);
+    setWatchLaterIds(watchLaterIds.concat(movieResultId));
   };
 
   const theme = createMuiTheme({
