@@ -79,7 +79,7 @@ const MovieResult: React.FunctionComponent<MovieResult> = (props) => {
                 <TableBody>
                   <$TableRow>
                     <TableCell colSpan={4}>
-                      <img src={url} alt={row.title} height={500} />
+                      <img src={url} alt={row.title} height={400} />
                     </TableCell>
                     <TableCell colSpan={4}>
                       <Typography>{row.overview}</Typography>
