@@ -3,6 +3,7 @@
 import * as React from 'react';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import Config from '../types/Config';
 import Favorites from './Favorites';
@@ -58,26 +59,36 @@ const App: React.FunctionComponent<AppProps> = () => {
       });
   };
 
+  const theme = createMuiTheme({
+    palette: {
+      primary: {
+        main: '#f9bc50',
+      },
+    },
+  });
+
   return (
-    <BrowserRouter>
-      <TopNav />
-      <$Container>
-        <Header title='Cinemate' />
-        <Switch>
-          <Route path='/favorites'>
-            <Favorites />
-          </Route>
-          <Route path='/later'>
-            <WatchLater />
-          </Route>
-          <Route path='/'>
-            <Search onSubmit={handleSearchSubmit} />
-            <MovieResults tmdbConfig={tmdbConfig} movies={movies} />
-          </Route>
-        </Switch>
-      </$Container>
-      <NavBar />
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <TopNav />
+        <$Container>
+          <Header title='Cinemate' />
+          <Switch>
+            <Route path='/favorites'>
+              <Favorites />
+            </Route>
+            <Route path='/later'>
+              <WatchLater />
+            </Route>
+            <Route path='/'>
+              <Search onSubmit={handleSearchSubmit} />
+              <MovieResults tmdbConfig={tmdbConfig} movies={movies} />
+            </Route>
+          </Switch>
+        </$Container>
+        <NavBar />
+      </BrowserRouter>
+    </ThemeProvider>
   );
 };
 
