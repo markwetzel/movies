@@ -71,15 +71,15 @@ export default function MovieMenu() {
       >
         <StyledMenuItem>
           <ListItemIcon>
-            <FavoriteIcon fontSize='small' />
-          </ListItemIcon>
-          <ListItemText primary='Add to Favorites' />
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemIcon>
             <ScheduleIcon fontSize='small' />
           </ListItemIcon>
           <ListItemText primary='Save to Watch Later' />
+        </StyledMenuItem>
+        <StyledMenuItem>
+          <ListItemIcon>
+            <FavoriteIcon fontSize='small' />
+          </ListItemIcon>
+          <ListItemText primary='Add to Favorites' />
         </StyledMenuItem>
       </StyledMenu>
     </div>
