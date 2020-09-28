@@ -1,5 +1,3 @@
-import Menu, { MenuProps } from '@material-ui/core/Menu';
-
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { IconButton } from '@material-ui/core';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -8,38 +6,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import React from 'react';
 import ScheduleIcon from '@material-ui/icons/Schedule';
-import { withStyles } from '@material-ui/core/styles';
-
-const StyledMenu = withStyles({
-  paper: {
-    border: '1px solid #d3d4d5',
-  },
-})((props: MenuProps) => (
-  <Menu
-    elevation={0}
-    getContentAnchorEl={null}
-    anchorOrigin={{
-      vertical: 'bottom',
-      horizontal: 'center',
-    }}
-    transformOrigin={{
-      vertical: 'top',
-      horizontal: 'center',
-    }}
-    {...props}
-  />
-));
-
-const StyledMenuItem = withStyles((theme) => ({
-  root: {
-    '&:focus': {
-      backgroundColor: theme.palette.primary.main,
-      '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-        color: theme.palette.common.white,
-      },
-    },
-  },
-}))(MenuItem);
+import StyledMenu from './StyledMenu';
 
 export default function MovieMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -48,12 +15,30 @@ export default function MovieMenu() {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const closeMenu = () => {
     setAnchorEl(null);
   };
 
+  const addToWatchLater = () => {
+    console.log('Add to watch later');
+  };
+
+  const addToFavorites = () => {
+    console.log('Add to favorites');
+  };
+
+  const handleWatchLaterClick = () => {
+    addToWatchLater();
+    closeMenu();
+  };
+
+  const handleFavoriteClick = () => {
+    addToFavorites();
+    closeMenu();
+  };
+
   return (
-    <div>
+    <>
       <IconButton
         aria-controls='customized-menu'
         aria-haspopup='true'
@@ -67,21 +52,21 @@ export default function MovieMenu() {
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
-        onClose={handleClose}
+        onClose={closeMenu}
       >
-        <StyledMenuItem>
+        <MenuItem onClick={handleWatchLaterClick}>
           <ListItemIcon>
             <ScheduleIcon fontSize='small' />
           </ListItemIcon>
           <ListItemText primary='Save to Watch Later' />
-        </StyledMenuItem>
-        <StyledMenuItem>
+        </MenuItem>
+        <MenuItem onClick={handleFavoriteClick}>
           <ListItemIcon>
             <FavoriteIcon fontSize='small' />
           </ListItemIcon>
           <ListItemText primary='Add to Favorites' />
-        </StyledMenuItem>
+        </MenuItem>
       </StyledMenu>
-    </div>
+    </>
   );
 }
