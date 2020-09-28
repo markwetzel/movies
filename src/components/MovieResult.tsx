@@ -26,12 +26,14 @@ const $TableRow = styled(TableRow)`
   vertical-align: top !important;
 `;
 
-export interface MovieResult {
+export interface MovieResultProps {
   row: MR;
   tmdbConfig?: Config;
+  onWatchLaterClick?(movieResultId: number): void;
+  onFavoriteClick?(movieResultId: number): void;
 }
 
-const MovieResult: React.FunctionComponent<MovieResult> = (props) => {
+const MovieResult: React.FunctionComponent<MovieResultProps> = (props) => {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
   let url;
@@ -65,7 +67,13 @@ const MovieResult: React.FunctionComponent<MovieResult> = (props) => {
         </$ResponsiveTableCell>
         <TableCell align='right'>{formatDate(row.release_date)}</TableCell>
         <TableCell align='right'>
-          <MovieMenu />
+          {props.onFavoriteClick && props.onWatchLaterClick && (
+            <MovieMenu
+              movieResultId={row.id}
+              onFavoriteClick={props.onFavoriteClick}
+              onWatchLaterClick={props.onWatchLaterClick}
+            />
+          )}
         </TableCell>
       </TableRow>
       <TableRow>

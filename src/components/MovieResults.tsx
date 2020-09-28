@@ -25,6 +25,8 @@ export const $ResponsiveTableCell = styled(TableCell)`
 export interface MovieResultsProps {
   movies: MovieResult[];
   tmdbConfig?: Config;
+  onWatchLaterClick?(movieResultId: number): void;
+  onFavoriteClick?(movieResultId: number): void;
 }
 
 const MovieResults: React.FunctionComponent<MovieResultsProps> = (props) => {
@@ -45,6 +47,8 @@ const MovieResults: React.FunctionComponent<MovieResultsProps> = (props) => {
           {movies.map((movie) => (
             <MovieResultJsx
               key={movie.id}
+              onFavoriteClick={props.onFavoriteClick}
+              onWatchLaterClick={props.onWatchLaterClick}
               row={movie}
               tmdbConfig={tmdbConfig}
             />
