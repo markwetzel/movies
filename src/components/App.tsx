@@ -59,6 +59,14 @@ const App: React.FunctionComponent<AppProps> = () => {
       });
   };
 
+  const handleFavoriteClick = () => {
+    console.log('Favorite click');
+  };
+
+  const handleWatchLaterClick = () => {
+    console.log('Watch later click');
+  };
+
   const theme = createMuiTheme({
     palette: {
       primary: {
@@ -82,7 +90,12 @@ const App: React.FunctionComponent<AppProps> = () => {
             </Route>
             <Route path='/'>
               <Search onSubmit={handleSearchSubmit} />
-              <MovieResults tmdbConfig={tmdbConfig} movies={movies} />
+              <MovieResults
+                movies={movies}
+                onFavoriteClick={handleFavoriteClick}
+                onWatchLaterClick={handleWatchLaterClick}
+                tmdbConfig={tmdbConfig}
+              />
             </Route>
           </Switch>
         </$Container>
