@@ -48,7 +48,7 @@ const MovieResult: React.FunctionComponent<MovieResultProps> = (props) => {
   }
 
   return (
-    <React.Fragment>
+    <>
       <TableRow>
         <TableCell>
           <IconButton
@@ -99,7 +99,7 @@ const MovieResult: React.FunctionComponent<MovieResultProps> = (props) => {
           </Collapse>
         </TableCell>
       </TableRow>
-    </React.Fragment>
+    </>
   );
 };
 
