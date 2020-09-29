@@ -52,6 +52,19 @@ const App: React.FunctionComponent<AppProps> = () => {
     if (currentWatchLaterJson) {
       setWatchLater(currentWatchLaterJson);
     }
+
+    // Get current movies from localStorage
+    const currentFavoritesRaw = localStorage.getItem('favorites');
+
+    let currentFavoritesJson;
+
+    if (currentFavoritesRaw) {
+      currentFavoritesJson = JSON.parse(currentFavoritesRaw) as MovieResult[];
+    }
+
+    if (currentFavoritesJson) {
+      setFavorites(currentFavoritesJson);
+    }
   }, []);
 
   const handleSearchSubmit = async (
@@ -71,7 +84,12 @@ const App: React.FunctionComponent<AppProps> = () => {
     if (!favorites.find((movie: MovieResult) => movie.id === movieResultId)) {
       const movieResult = await API.fetchMovie(movieResultId);
       if (movieResult) {
-        setFavorites(favorites.concat(movieResult));
+        const newFavorites = favorites.concat(movieResult);
+
+        setFavorites(newFavorites);
+
+        // Persist to localStorage
+        localStorage.setItem('favorites', JSON.stringify(newFavorites));
       }
     }
   };
@@ -102,7 +120,14 @@ const App: React.FunctionComponent<AppProps> = () => {
   };
 
   const handleRemoveFavoriteClick = (movieResultId: number) => {
-    setFavorites(favorites.filter((movie) => movie.id !== movieResultId));
+    const newFavorites = favorites.filter(
+      (movie) => movie.id !== movieResultId
+    );
+
+    setFavorites(newFavorites);
+
+    // Persist to localStorage
+    localStorage.setItem('favorites', JSON.stringify(newFavorites));
   };
 
   const theme = createMuiTheme({
