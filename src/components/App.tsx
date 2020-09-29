@@ -21,7 +21,6 @@ export interface AppProps {}
 
 const App: React.FunctionComponent<AppProps> = () => {
   const [movies, setMovies] = React.useState<MovieResult[]>([]);
-  const [watchLaterIds, setWatchLaterIds] = React.useState<number[]>([]);
   const [watchLater, setWatchLater] = React.useState<MovieResult[]>([]);
 
   const [tmdbConfig, setTmdbConfig] = React.useState<Config>();
@@ -67,6 +66,10 @@ const App: React.FunctionComponent<AppProps> = () => {
     }
   };
 
+  const handleRemoveWatchLaterClick = (movieResultId: number) => {
+    setWatchLater(watchLater.filter((movie) => movie.id !== movieResultId));
+  };
+
   const theme = createMuiTheme({
     palette: {
       primary: {
@@ -87,7 +90,7 @@ const App: React.FunctionComponent<AppProps> = () => {
             </Route>
             <Route path='/later'>
               <WatchLater
-                watchLaterIds={watchLaterIds}
+                onRemoveClick={handleRemoveWatchLaterClick}
                 watchLaterMovies={watchLater}
               />
             </Route>

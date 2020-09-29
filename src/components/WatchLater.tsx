@@ -1,16 +1,19 @@
 import MovieResult from '../types/MovieResult';
-import MovieResults from './MovieResults';
 import React from 'react';
+import WatchLaterResults from './WatchLaterResults';
 
 export interface WatchLaterProps {
-  watchLaterIds: number[];
+  onRemoveClick(movieResultId: number): void;
   watchLaterMovies: MovieResult[];
 }
 
 const WatchLater: React.FC<WatchLaterProps> = (props) => {
   return (
     <>
-      <MovieResults movies={props.watchLaterMovies} />
+      <WatchLaterResults
+        movies={props.watchLaterMovies}
+        onRemoveClick={props.onRemoveClick}
+      />
     </>
   );
 };
