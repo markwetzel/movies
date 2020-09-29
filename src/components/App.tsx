@@ -39,6 +39,32 @@ const App: React.FunctionComponent<AppProps> = () => {
       .catch((error) => {
         console.log(error);
       });
+
+    // Get current movies from localStorage
+    const currentWatchLaterRaw = localStorage.getItem('watch-later');
+
+    let currentWatchLaterJson;
+
+    if (currentWatchLaterRaw) {
+      currentWatchLaterJson = JSON.parse(currentWatchLaterRaw) as MovieResult[];
+    }
+
+    if (currentWatchLaterJson) {
+      setWatchLater(currentWatchLaterJson);
+    }
+
+    // Get current movies from localStorage
+    const currentFavoritesRaw = localStorage.getItem('favorites');
+
+    let currentFavoritesJson;
+
+    if (currentFavoritesRaw) {
+      currentFavoritesJson = JSON.parse(currentFavoritesRaw) as MovieResult[];
+    }
+
+    if (currentFavoritesJson) {
+      setFavorites(currentFavoritesJson);
+    }
   }, []);
 
   const handleSearchSubmit = async (
@@ -58,7 +84,12 @@ const App: React.FunctionComponent<AppProps> = () => {
     if (!favorites.find((movie: MovieResult) => movie.id === movieResultId)) {
       const movieResult = await API.fetchMovie(movieResultId);
       if (movieResult) {
-        setFavorites(favorites.concat(movieResult));
+        const newFavorites = favorites.concat(movieResult);
+
+        setFavorites(newFavorites);
+
+        // Persist to localStorage
+        localStorage.setItem('favorites', JSON.stringify(newFavorites));
       }
     }
   };
@@ -67,17 +98,36 @@ const App: React.FunctionComponent<AppProps> = () => {
     if (!watchLater.find((movie: MovieResult) => movie.id === movieResultId)) {
       const movieResult = await API.fetchMovie(movieResultId);
       if (movieResult) {
-        setWatchLater(watchLater.concat(movieResult));
+        const newWatchLater = watchLater.concat(movieResult);
+
+        setWatchLater(newWatchLater);
+
+        // Persist to localStorage
+        localStorage.setItem('watch-later', JSON.stringify(newWatchLater));
       }
     }
   };
 
   const handleRemoveWatchLaterClick = (movieResultId: number) => {
-    setWatchLater(watchLater.filter((movie) => movie.id !== movieResultId));
+    const newWatchLater = watchLater.filter(
+      (movie) => movie.id !== movieResultId
+    );
+
+    setWatchLater(newWatchLater);
+
+    // Persist to localStorage
+    localStorage.setItem('watch-later', JSON.stringify(newWatchLater));
   };
 
   const handleRemoveFavoriteClick = (movieResultId: number) => {
-    setFavorites(favorites.filter((movie) => movie.id !== movieResultId));
+    const newFavorites = favorites.filter(
+      (movie) => movie.id !== movieResultId
+    );
+
+    setFavorites(newFavorites);
+
+    // Persist to localStorage
+    localStorage.setItem('favorites', JSON.stringify(newFavorites));
   };
 
   const theme = createMuiTheme({
