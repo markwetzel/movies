@@ -22,6 +22,7 @@ export interface AppProps {}
 const App: React.FunctionComponent<AppProps> = () => {
   const [movies, setMovies] = React.useState<MovieResult[]>([]);
   const [watchLater, setWatchLater] = React.useState<MovieResult[]>([]);
+  const [favorites, setFavorites] = React.useState<MovieResult[]>([]);
 
   const [tmdbConfig, setTmdbConfig] = React.useState<Config>();
 
@@ -53,8 +54,13 @@ const App: React.FunctionComponent<AppProps> = () => {
     }
   };
 
-  const handleFavoriteClick = (movieResultId: number) => {
-    console.log('Favorite click', movieResultId);
+  const handleFavoriteClick = async (movieResultId: number) => {
+    if (!favorites.find((movie: MovieResult) => movie.id === movieResultId)) {
+      const movieResult = await API.fetchMovie(movieResultId);
+      if (movieResult) {
+        setFavorites(favorites.concat(movieResult));
+      }
+    }
   };
 
   const handleWatchLaterClick = async (movieResultId: number) => {
@@ -68,6 +74,10 @@ const App: React.FunctionComponent<AppProps> = () => {
 
   const handleRemoveWatchLaterClick = (movieResultId: number) => {
     setWatchLater(watchLater.filter((movie) => movie.id !== movieResultId));
+  };
+
+  const handleRemoveFavoriteClick = (movieResultId: number) => {
+    setFavorites(favorites.filter((movie) => movie.id !== movieResultId));
   };
 
   const theme = createMuiTheme({
@@ -86,7 +96,10 @@ const App: React.FunctionComponent<AppProps> = () => {
           <Header title='Cinemate' />
           <Switch>
             <Route path='/favorites'>
-              <Favorites />
+              <Favorites
+                onRemoveClick={handleRemoveFavoriteClick}
+                favoriteMovies={favorites}
+              />
             </Route>
             <Route path='/later'>
               <WatchLater
